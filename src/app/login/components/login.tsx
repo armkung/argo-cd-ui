@@ -23,8 +23,9 @@ export class Login extends React.Component<RouteComponentProps<{}>, State> {
     };
 
     public static getDerivedStateFromProps(props: RouteComponentProps<{}>): Partial<State> {
+        const basehref = document.querySelector('head > base').getAttribute('href').replace(/\/$/, '');
         const search = new URLSearchParams(props.history.location.search);
-        const returnUrl = search.get('return_url') || '';
+        const returnUrl = search.get('return_url') || `${window.location.origin}${basehref}`;
         const ssoLoginError = search.get('sso_error') || '';
         return { ssoLoginError, returnUrl };
     }

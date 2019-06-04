@@ -64,11 +64,11 @@ requests.onError.subscribe(async (err) => {
         if (!history.location.pathname.startsWith('/login')) {
             // Query for basehref and remove trailing /.
             // If basehref is the default `/` it will become an empty string.
-            const basehref = document.querySelector('head > base').getAttribute('href').replace(/\/$/, '');
+            // const basehref = document.querySelector('head > base').getAttribute('href').replace(/\/$/, '');
             if (await isExpiredSSO()) {
-                window.location.href = `${basehref}/auth/login?return_url=${encodeURIComponent(location.href)}`;
+                window.location.href = `auth/login?return_url=${encodeURIComponent(location.href)}`;
             } else {
-                history.push(`${basehref}/login?return_url=${encodeURIComponent(location.href)}`);
+                history.push(`login?return_url=${encodeURIComponent(location.href)}`);
             }
         }
     }
